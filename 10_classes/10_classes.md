@@ -1,7 +1,7 @@
 ---
-title: Pokročilé aspekty Pythonu
+title: Triedy a pokročilé aspekty Pythonu
 #author:
-#date:
+#date: 25.05.2023
 #institute:
 #abstract:
 #thanks:
@@ -39,20 +39,152 @@ header-includes:
 #More at: http://pandoc.org/MANUAL.html#variables-set-by-pandoc
 ---
 
-# Veci, ktoré sme nestihli
+# Osnova
 
-... ale je dobré vedieť, že existujú.
-
+* Triedy
+  - Tvorba nových tried
+  - Magické metódy
+  - Dedičnosť
 * List comprehensions
 * Pokročilé používanie funkcií 
   - Funkcie s ľubovoľným počtom argumentov
   - Docstring
   - `*args` a `**kwargs`
-* Triedy
-  - Tvorba nových tried
-  - Magické metódy
-  - Dedičnosť
 * Moduly a balíčky
+
+
+# Trieda a typ
+
+Pre Python sú slová *trieda* a *typ* viac-menej ekvivalentné pojmy.
+
+* `1` je z triedy/typu `int`
+* `[1,2]` je z triedy/typu `list`
+
+Konkrétne realizácie (inštancie) triedy sú objekty. 
+
+(Pre Python sú slová *objekt* a *inštancia* viac-menej ekvivalentné pojmy.)
+
+Trieda je teda nejaký vzor pre objekt - určuje ako sa objekt chová. Napr.:
+
+* operátor `+` je definovaný pre oba typy `int` a `list`, ale chová sa inak
+
+
+# Trieda
+
+Trieda teda určuje chovanie objektu:
+
+* chovanie operátorov
+* definuje metódy
+* definuje asociované dáta
+
+
+# Vlastné triedy
+
+Python vám dovoľuje vytvoriť si vlastné triedy:
+
+```python
+class Point:
+    x = 4 # asociované dáta
+    y = 3
+
+    def get_distance_from_origin(self): # metóda
+        return (self.x**2 + self.y**2)**0.5
+
+p = Point()
+print(p.x, p.y) # 4 3
+print(p.get_distance_from_origin()) # 5.0
+```
+
+# Čo je vlastne metóda?
+
+Metóda je funkcia, ktorá je asociovaná k triede.
+
+Metódu je možné zavolať dvoma spôsobmi:
+
+```python
+str.replace('A D C', 'D', 'B')
+```
+
+alebo
+
+```python
+'A D C'.replace('D', 'B')
+```
+
+Druhý spôsob vidíte častejšie.
+
+Metóda je teda funkcia, ktorej ako prvý argument dáme objekt, pre ktorý je metóda definovaná.
+
+# Inicializácia triedy
+
+Na inicializáciu je špeciálna metóda `__init__`.
+
+```python
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+p = Point(1.0, 3.0)
+print(p.x, p.y)
+```
+
+# Magic methods (Dunder methods)
+
+Iné tzv. magické metódy existujú pre rôzne aplikácie, najčastejšie pre definíciu chovania operátorov a základných funkcií (`len`, `str`,...) -- [Kompletný zoznam](https://rszalski.github.io/magicmethods/).
+
+
+Sčítanie bodov:
+
+```python
+class Point:
+    def __init__(self, x, y):
+        ...
+    def __add__(self, other):
+        x_new = self.x + other.x
+        y_new = self.y + other.y
+        return Point(x_new, y_new)
+
+p1 = Point(1.0, 3.0)
+p2 = Point(-1.0, 3.0)
+p3 = p1 + p2
+print(p3.x, p3.y)
+```
+
+# Funkcia `dir`
+
+Vypíše čo objekt obsahuje (metódy, dáta):
+
+```python
+p = Point(1, 2)
+print(dir(p))
+```
+
+
+# Výhody tried XXX EDIT TOTO A DAL
+
+Malo by byť jasné, že triedy nutne nepotrebujete -- funkcie a základné dátové typy v bohate stačia.
+
+Výhody používania tried:
+
+* Organizácia kódu a kreativita - trieda je vyššia abstrakcia, ktorá spája funkcie a dáta.
+* Ľahké vyhľadávanie - metódy ľahko nájdete, funkcie môžu byť kdekoľvek.
+* Dokumentácia - docstringy môžete dať pod jednotlivé metódy a triedy. 
+* Recyklácia kódu pomocou *dedičnosti*.
+* Polymorfizmus a *Duck typing* - *keď to kváka ako kačka, je to kačka*:
+
+```python
+class Swan:                      class Duck:
+    def quack(self):                 def quack(self):
+        ...                              ...
+```
+
+# Nevýhody tried
+
+* Dodatočná komplexita.
+* Výber toho, aké triedy implementujete, a ako spolu budú interagovať nemusí byť jednoznačný. Je viac možných abstrakcií pre každý daný problém, a ak zvolíte zlú, tak si to uvedomíte väčšinou neskoro.
+
+
 
 
 # List comprehensions
@@ -233,134 +365,6 @@ print_all(1, 2, 3, 4, c='red', d=5)
 ```
 
 
-# Trieda a typ
-
-*Nasledujúce slidy "preletia v rýchlosti" nad konceptom triedy -- triedy sú relatívne komplikované.*
-
-Pre Python sú slová *trieda* a *typ* viac-menej ekvivalentné pojmy.
-
-* `1` je z triedy/typu `int`
-* `[1,2]` je z triedy/typu `list`
-
-Konkrétne realizácie (inštancie) triedy sú objekty. 
-
-(Pre Python sú slová *objekt* a *inštancia* viac-menej ekvivalentné pojmy.)
-
-Trieda je teda nejaký vzor pre objekt - určuje ako sa objekt chová. Napr.:
-
-* operátor `+` je definovaný pre oba typy `int` a `list`, ale chová sa inak
-
-
-# Trieda
-
-Trieda teda určuje chovanie objektu:
-
-* chovanie operátorov
-* definuje metódy
-* definuje asociované dáta
-
-
-# Vlastné triedy
-
-Python vám dovoľuje vytvoriť si vlastné triedy:
-
-```python
-class MyLittleClass:
-    def my_method(self, arg1, arg2):
-        ...
-
-my_object = MyLittleClass()
-my_object.my_method(1, 2)
-```
-
-# Čo je vlastne metóda?
-
-Metóda je funkcia, ktorá je asociovaná k triede.
-
-Metódu je možné zavolať dvoma spôsobmi:
-
-```python
-str.replace('A D C', 'D', 'B')
-```
-
-alebo
-
-```python
-'A D C'.replace('D', 'B')
-```
-
-Druhý spôsob vidíte častejšie.
-
-Metóda je teda funkcia, ktorej ako prvý argument dáme objekt, pre ktorý je metóda definovaná.
-
-# Inicializácia triedy
-
-Na inicializáciu je špeciálna metóda `__init__`.
-
-```python
-class Point:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-
-p = Point(1.0, 3.0)
-print(p.x, p.y)
-```
-
-# Magické metódy
-
-Iné tzv. magické metódy existujú pre rôzne aplikácie, najčastejšie pre definíciu chovania operátorov a základných funkcií (`len`, `str`,...) -- [Kompletný zoznam](https://rszalski.github.io/magicmethods/).
-
-
-Sčítanie bodov:
-
-```python
-class Point:
-    def __init__(self, x, y):
-        ...
-    def __add__(self, other):
-        x_new = self.x + other.x
-        y_new = self.y + other.y
-        return Point(x_new, y_new)
-
-p1 = Point(1.0, 3.0)
-p2 = Point(-1.0, 3.0)
-p3 = p1 + p2
-print(p3.x, p3.y)
-```
-
-# Funkcia `dir`
-
-Vypíše čo objekt obsahuje (metódy, dáta):
-
-```python
-p = Point(1, 2)
-print(dir(p))
-```
-
-
-# Výhody tried
-
-Malo by byť jasné, že triedy nutne nepotrebujete -- funkcie a základné dátové typy v bohate stačia.
-
-Výhody používania tried:
-
-* Organizácia kódu a kreativita - trieda je vyššia abstrakcia, ktorá spája funkcie a dáta.
-* Ľahké vyhľadávanie - metódy ľahko nájdete, funkcie môžu byť kdekoľvek.
-* Dokumentácia - docstringy môžete dať pod jednotlivé metódy a triedy. 
-* Recyklácia kódu pomocou *dedičnosti*.
-* Polymorfizmus a *Duck typing* - *keď to kváka ako kačka, je to kačka*:
-
-```python
-class Swan:                      class Duck:
-    def quack(self):                 def quack(self):
-        ...                              ...
-```
-
-# Nevýhody tried
-
-* Dodatočná komplexita.
-* Výber toho, aké triedy implementujete, a ako spolu budú interagovať nemusí byť jednoznačný. Je viac možných abstrakcií pre každý daný problém, a ak zvolíte zlú, tak si to uvedomíte väčšinou neskoro.
 
 
 # Moduly a balíčky 
@@ -375,8 +379,3 @@ import názov_súboru_bez_koncovky
 * Balíček je kolekcia modulov.
 
 [Ako organizovať balíček a viac o moduloch v dokumentácií Pythonu](https://docs.python.org/3/tutorial/modules.html).
-
-
-
-
-
