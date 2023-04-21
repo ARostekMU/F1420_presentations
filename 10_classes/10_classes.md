@@ -177,6 +177,55 @@ mohli písať
 v * 2
 ```
 
+#
+
+Čo keď chcem vytvoriť novú triedu `VectorQuantity`? Určite zdieľa veľa funkcionality s `Vector`, ale predsa nebudem kopírovať kód...
+
+# Dedičnosť
+
+Dedičnosť (inheritance) označuje, že novú triedu nevytvárame z nuly, ale využijeme už existujúcu triedu.
+
+```python
+class VectorQuantity(Vector):
+    unit = 'm/s'
+
+v = VectorQuantity(2, 5)
+print(v.x, v.y) # 2 5
+print(v.unit) # m/s
+```
+
+V tomto prípade je:
+
+ - `Vector` tzv. `parent class`
+ - `VectorQuantity` tzv. `child class`.
+
+
+# Inicializácia pri dedení
+
+```python
+class VectorQuantity(Vector):
+    def __init__(self, x, y, unit):
+        Vector.__init__(self, x, y) # inicializácia rodiča
+        self.unit = unit
+
+v = VectorQuantity(2, 5, 'm/s')
+print(v.x, v.y) # 2 5
+print(v.unit) # m/s
+```
+
+# Cvičenie 2
+
+Vytvorte triedu `Particle`, ktorá bude mať atribút `mass`. Potom vytvorte triedu `ChargedParticle`, ktorá podedí z `Particle`, a bude mať navyše atribút `charge`.
+Otestujte, že triedy je možné takto použiť:
+
+
+```python
+p = Particle(1.67e-27)
+print(p.mass) # 1.67e-27
+
+cp = ChargedParticle(1.67e-27, 1.6e-19)
+print(cp.charge) # 1.6e-19
+```
 
 # Funkcia `dir`
 
