@@ -83,16 +83,19 @@ Trieda teda určuje chovanie objektu:
 Python vám dovoľuje vytvoriť si vlastné triedy:
 
 ```python
-class Point:
-    x = 4 # asociované dáta
+class Vector:
+    x = 4
     y = 3
 
-    def get_distance_from_origin(self): # metóda
-        return (self.x**2 + self.y**2)**0.5
+    def scale(self, factor):
+        self.x = self.x * factor
+        self.y = self.y * factor
 
-p = Point()
-print(p.x, p.y) # 4 3
-print(p.get_distance_from_origin()) # 5.0
+v = Vector()
+print(v.x, v.y) # 4 3
+
+v.scale(2)
+print(v.x, v.y) # 8 6
 ```
 
 # Čo je vlastne metóda?
@@ -120,13 +123,13 @@ Metóda je teda funkcia, ktorej ako prvý argument dáme objekt, pre ktorý je m
 Na inicializáciu je špeciálna metóda `__init__`.
 
 ```python
-class Point:
+class Vector:
     def __init__(self, x, y):
         self.x = x
         self.y = y
 
-p = Point(1.0, 3.0)
-print(p.x, p.y)
+v = Vector(1.0, 3.0)
+print(v.x, v.y) # 1.0 3.0
 ```
 
 # Magic methods (Dunder methods)
@@ -137,18 +140,18 @@ Iné tzv. magické metódy existujú pre rôzne aplikácie, najčastejšie pre d
 Sčítanie bodov:
 
 ```python
-class Point:
+class Vector:
     def __init__(self, x, y):
         ...
     def __add__(self, other):
         x_new = self.x + other.x
         y_new = self.y + other.y
-        return Point(x_new, y_new)
+        return Vector(x_new, y_new)
 
-p1 = Point(1.0, 3.0)
-p2 = Point(-1.0, 3.0)
-p3 = p1 + p2
-print(p3.x, p3.y)
+v1 = Vector(1.0, 3.0)
+v2 = Vector(-1.0, 3.0)
+v3 = v1 + v2
+print(v3.x, v3.y) # 0.0 6.0
 ```
 
 # Funkcia `dir`
@@ -156,8 +159,8 @@ print(p3.x, p3.y)
 Vypíše čo objekt obsahuje (metódy, dáta):
 
 ```python
-p = Point(1, 2)
-print(dir(p))
+v = Vector(1, 2)
+print(dir(v))
 ```
 
 
