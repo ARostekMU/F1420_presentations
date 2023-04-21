@@ -87,9 +87,9 @@ class Vector:
     x = 4
     y = 3
 
-    def scale(self, factor):
-        self.x = self.x * factor
-        self.y = self.y * factor
+    def scale(self, scalar):
+        self.x = self.x * scalar
+        self.y = self.y * scalar
 
 v = Vector()
 print(v.x, v.y) # 4 3
@@ -153,6 +153,30 @@ v2 = Vector(-1.0, 3.0)
 v3 = v1 + v2
 print(v3.x, v3.y) # 0.0 6.0
 ```
+
+# Cvičenie 1
+
+Naša trieda `Vector` má implementovanú metódu `scale`, ktorá vynásobí jednotlivé komponenty daného vektora argumentom `scalar`.
+
+```python
+class Vector:
+    ...
+    def scale(self, scalar):
+        self.x = self.x * scalar
+        self.y = self.y * scalar
+
+v = Vector(1, 3)
+```
+
+Nahraďte túto metódu magickou metódou `__mul__` [(nápoveda tu)](https://rszalski.github.io/magicmethods/) tak, aby sme namiesto 
+```python
+v.scale(2)
+```
+mohli písať
+```python
+v * 2
+```
+
 
 # Funkcia `dir`
 
