@@ -256,6 +256,33 @@ print(dir(v))
 * Výkon: Používanie tried môže viesť k zníženiu výkonu, pretože triedy musia byť inicializované a triedy musia byť prechádzané cez viacero funkcií.
 
 
+# Moduly a balíčky 
+
+* Modul v Pythone je jednoduchý textový súbor s Pythoním kódom a príponou `.py`
+* Modul je možné importovať pomocou kľúčového slova `import`:
+
+```python
+import názov_súboru_bez_koncovky
+```
+
+* Balíček je kolekcia modulov.
+
+[Ako organizovať balíček a viac o moduloch v dokumentácií Pythonu](https://docs.python.org/3/tutorial/modules.html).
+
+
+# Cvičenie 3
+
+Skopírujte triedu `Particle`, ktorú ste vytvorili v predchádzajúcom cvičení, a vložte ju do nového pythonieho modulu `particle.py`. 
+
+Overte, že sa dá `Particle` importovať a použiť:
+
+```python
+from particle import Particle
+
+p = Particle(5e-27)
+print(p.mass)
+```
+
 
 # List comprehensions
 
@@ -294,6 +321,7 @@ je možné použiť:
 ```python
 lst = [ i**2 for i in range(10) if i % 2 == 0 ]
 ```
+
 
 # Funkcia `help`
 
@@ -401,9 +429,10 @@ Je možné to kombinovať s inými argumentami:
 def add_to_list(lst, *args):
     for i in args:
         lst.append(i)
+    print(lst)
 
 x = [1, 2]
-add_to_list(l, 3, 4, 'abc')
+add_to_list(x, 3, 4, 'abc')
 ```
 
 
@@ -439,17 +468,3 @@ print_all(1, 2, 3, 4, c='red', d=5)
 ```
 
 
-
-
-# Moduly a balíčky 
-
-* Modul v Pythone je jednoduchý textový súbor s Pythoním kódom a príponou `.py`
-* Modul je možné importovať pomocou kľúčového slova `import`:
-
-```python
-import názov_súboru_bez_koncovky
-```
-
-* Balíček je kolekcia modulov.
-
-[Ako organizovať balíček a viac o moduloch v dokumentácií Pythonu](https://docs.python.org/3/tutorial/modules.html).
