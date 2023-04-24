@@ -237,29 +237,23 @@ print(dir(v))
 ```
 
 
-# Výhody tried XXX EDIT TOTO A DAL
+# Výhody tried
 
-Malo by byť jasné, že triedy nutne nepotrebujete -- funkcie a základné dátové typy v bohate stačia.
+ * Modulárnosť: Triedy umožňujú programátorom rozdeliť program do menších a zrozumiteľnejších častí. To uľahčuje údržbu kódu a jeho rozšíriteľnosť.
 
-Výhody používania tried:
+ * Opätovné použitie: Triedy umožňujú programátorom znovu použiť kód, ktorý bol už vytvorený a overený v inom kontexte. To ušetrí čas a úsilie a znižuje riziko chýb.
 
-* Organizácia kódu a kreativita - trieda je vyššia abstrakcia, ktorá spája funkcie a dáta.
-* Ľahké vyhľadávanie - metódy ľahko nájdete, funkcie môžu byť kdekoľvek.
-* Dokumentácia - docstringy môžete dať pod jednotlivé metódy a triedy. 
-* Recyklácia kódu pomocou *dedičnosti*.
-* Polymorfizmus a *Duck typing* - *keď to kváka ako kačka, je to kačka*:
+ * Abstrakcia: Triedy umožňujú abstrakciu zložitých systémov a návrh programu na vyššej úrovni. To umožňuje programátorom sústrediť sa na funkčnosť programu a nezaoberať sa podrobne jeho vnútornou implementáciou.
 
-```python
-class Swan:                      class Duck:
-    def quack(self):                 def quack(self):
-        ...                              ...
-```
+ * Zapuzdrenie: Triedy umožňujú programátorom skryť podrobnosti o svojom kóde a vytvoriť tak zložitý systém, ktorý je jednoduchý na použitie a zrozumiteľný.
+
+
 
 # Nevýhody tried
 
-* Dodatočná komplexita.
-* Výber toho, aké triedy implementujete, a ako spolu budú interagovať nemusí byť jednoznačný. Je viac možných abstrakcií pre každý daný problém, a ak zvolíte zlú, tak si to uvedomíte väčšinou neskoro.
+* Komplexnosť: Triedy môžu byť veľmi zložité a ťažké na pochopenie, ak sa používajú neefektívne. Programátori musia starostlivo navrhovať triedy, aby boli jednoduché na použitie a zrozumiteľné.
 
+* Výkon: Používanie tried môže viesť k zníženiu výkonu, pretože triedy musia byť inicializované a triedy musia byť prechádzané cez viacero funkcií.
 
 
 
@@ -278,6 +272,10 @@ je možné v Pythone napísať:
 ```python
 lst = [ i**2 for i in range(10) ]
 ```
+
+Pre matematikov:
+
+$$ L = \{ i^2 | i \in \mathbb{Z}, 0 \leq i < 10 \} $$
 
 # List comprehensions
 
