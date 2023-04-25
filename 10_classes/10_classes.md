@@ -137,7 +137,7 @@ print(v.x, v.y) # 1.0 3.0
 Iné tzv. magické metódy existujú pre rôzne aplikácie, najčastejšie pre definíciu chovania operátorov a základných funkcií (`len`, `str`,...) -- [Kompletný zoznam](https://rszalski.github.io/magicmethods/).
 
 
-Sčítanie bodov:
+Sčítanie vektorov:
 
 ```python
 class Vector:
@@ -225,6 +225,7 @@ print(p.mass) # 1.67e-27
 
 cp = ChargedParticle(1.67e-27, 1.6e-19)
 print(cp.charge) # 1.6e-19
+print(cp.mass) # 1.67e-27
 ```
 
 # Funkcia `dir`
